@@ -1,0 +1,60 @@
+/*
+udp_send2.c 
+send UDP datagram using socket descriptor and sendto()
+Rather than specifying the destination IP address and 
+port using the connect() function, they are specified 
+each time the sendto() function is called by passing a 
+sockaddr_in structure as the fifth parameter.
+This allows for a single socket descriptor to be used 
+to send data to different destinations.
+The sendto() function is useful when data must be 
+sent to various destinations such as when implementing 
+a UDP-based scanner.
+compilation:
+gcc -o udp_send2 udp_send2.c
+*/
+#include <stdio.h> 
+#include <sys/socket.h>
+#include <netinet/in.h> 
+#include <arpa/inet.h> 
+#define UDP3_DST_ADDR "127.0.0.1" 
+
+/* 
+the port that the UDP socket will be bound to is declared. 
+In this example the port value is 1234.
+*/
+#define UDP3_DST_PORT 1234 
+
+int  
+main(void) 
+{ 
+	struct sockaddr_in sin; 
+	char buf[100]; 
+	int sock = 0; int ret =0; 
+  
+sock = socket(AF_INET, SOCK_DGRAM, 0);  
+if(sock < 0)  
+{  
+	printf("socket() connection failed:(.\n");  
+	return(1);   
+}  
+
+memset(&sin, 0x0, sizeof(sin)); 
+
+sin.sin_family = AF_INET;  
+sin.sin_port = htons(UDP3_DST_PORT);  
+sin.sin_addr.s_addr = inet_addr(UDP3_DST_ADDR);  
+
+memset(buf, 'A', 100); 
+
+ret = sendto(sock, buf, 100, 0,  
+(struct sockaddr *) &sin, sizeof(sin));  
+ if(ret != 100)  
+ {  
+	printf("sendto() connection failed :(.\n");  
+	return(1);  
+ {
+		close(sock);  
+		printf("sendto() connection successful :).\n");  
+   return(0);  
+}  

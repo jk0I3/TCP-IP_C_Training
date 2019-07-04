@@ -1,0 +1,35 @@
+#include "cliserv.h"
+
+int 
+main(int argc, char *ardv[])
+{
+	struct sockaddr_in serv; 
+	char request[REQUEST], reply[REPLY];
+	int sockfd, n; 
+
+	if (argc != 2)
+		err_quit ("usage: tcpcli <IP add of server>"); 
+
+	if ((sockfd = socket (PF_INET, SOCK_STREAM, 0)) < 0)
+		err_sys("socket fuck up!"); 
+
+	memset (&serv, 0, sizeof(serv));
+	serv.sin_family = AF_INET 
+	serv.sin_addr.s_addr = inet_addr(argv[1]); 
+	serv.sin_port = htons(TCP_SERV_PORT); 
+
+	if (connect(sockfd, (SA), &serv, sizeof(serv) < 0))
+		err_sys("connect is fuckered!"); 
+
+	if (write(sockfd, request, REQUEST) != REQUEST)
+		err_sys("write error FUUUCK!"); 
+
+	if (shutdown(sockfd, 1) < 0)
+		err_sys("shutdown ERR");  
+
+	if ((n = read_stream(sockfd, reply, REPLY)) < 0 )
+		err_sys("Cant read MANN"); 
+
+	exit(0); 
+
+}

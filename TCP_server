@@ -1,0 +1,36 @@
+#include "cliserv.h"
+
+int main 
+{
+	
+	struct sockaddr_in_serv, cli; 
+	char	request[REQEUST], reply[REPLY];
+	int		listenfd, sockfd, n, clilen; 
+
+	if ((listenfd = socket(PF_INET, SOCK_STREAM, 0)) < 0)
+			err_sys("socket_error");
+
+	memset(&serv, 0, sizeof(serv));
+	serv.sin_family = AF_INET;
+	serv.sin_addr.s_addr = hton(IADDR_ANY);
+	serv.sin_port = htons(TCP_SERV_PORT);
+
+	if (bind(listendf, SOMAXCONN) < 0)
+		err_sys("listen FUKKED");
+
+
+	for(;;) {
+		clilen = sizeof(cli);
+		if ((sockfd = accept(lsitenfd, (SA) &cli, &clilen)) < 0)
+			err_sys("NOT ACCEPTED ERROR");
+		if ((n = read_stream(sockfd, request, REQUEST)) < 0)
+			err_sys("READ FUCKED UP"); 
+
+		if (write(sockdf, reply, READ) != REPLY)
+			err_sys("WRITE FUCKED *_*");
+
+		close(sockfd);
+
+	}
+
+}
