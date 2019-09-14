@@ -2,10 +2,10 @@
 BSD socket/TCP-IP programming study projects in C programming language.
 Programs based on challenges, excercises, and examples from following technical biblical sources:
 
-TCP/IP Illustrated Vol 1-3
+TCP/IP Illustrated Vol 1-3 /
 Sockets, Shellcode, Porting and Coding /
 Hacking the art of exploitation /
-Unix programming enviroment/Advanced programming in Unix env /
+Unix programming enviroment/ Advanced programming in Unix env /
 
 Using these sources to train in network programming and understand the entire network stack and how it ticks. 
 
